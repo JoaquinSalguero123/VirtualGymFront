@@ -1,0 +1,121 @@
+/* =====================================================================
+   Sistema de diseño "Sala"
+   ---------------------------------------------------------------------
+   La paleta sale de los materiales de un gimnasio boutique bien hecho:
+   hormigón pulido, cuero verde botella, roble claro y acero cepillado.
+   Nada de negro puro ni de verdes flúor.
+
+   Todos los valores viven acá. Ningún componente escribe un color a mano:
+   así se puede reafinar la identidad entera desde un solo archivo.
+   ===================================================================== */
+
+:root {
+  /* ---------- Materiales ---------- */
+  --verde-sala: #17372b;   /* cuero verde botella. Color de marca y de acción */
+  --verde-hondo: #0e241b;  /* verde profundo, para superficies inmersivas */
+  --verde-claro: #2c5c47;  /* verde para estados hover y bordes activos */
+  --concreto: #e8eae7;     /* hormigón pulido. Fondo de la aplicación */
+  --tiza: #f7f8f6;         /* blanco tiza. Paneles y tarjetas */
+  --roble: #c08a4a;        /* roble claro. El único acento cálido */
+  --roble-suave: #e8d5bb;  /* roble diluido, para fondos de realce */
+  --tinta: #171a18;        /* carbón con tinte verde. Texto principal */
+  --acero: #8c9490;        /* acero cepillado. Texto secundario y bordes */
+  --acero-claro: #d3d8d4;  /* acero diluido, para líneas divisorias */
+
+  /* ---------- Estados ----------
+     Derivados de la paleta, no colores genéricos de framework.
+     El verde de "correcto" es más claro que el de marca para que se lea
+     como estado y no se confunda con un elemento de la identidad. */
+  --ok: #2e7d5b;
+  --ok-fondo: #e2f0e9;
+  --aviso: #b7791f;
+  --aviso-fondo: #f8eed8;
+  --alerta: #a33a2b;       /* ladrillo, no rojo de emergencia */
+  --alerta-fondo: #f7e3df;
+  --neutro-fondo: #e4e7e4;
+
+  /* ---------- Texto ---------- */
+  --texto: var(--tinta);
+  --texto-suave: #5c6460;
+  --texto-tenue: var(--acero);
+  --texto-invertido: #f2f5f1;
+
+  /* ---------- Superficies ---------- */
+  --fondo: var(--concreto);
+  --panel: var(--tiza);
+  --borde: var(--acero-claro);
+  --borde-fuerte: #b9c0bb;
+
+  /* ---------- Tipografía ----------
+     Una sola familia. El contraste sale del eje de ancho. */
+  --fuente: "Archivo", ui-sans-serif, system-ui, -apple-system, sans-serif;
+
+  /* Escala modular basada en una razón de 1.25 (cuarta mayor atenuada),
+     siguiendo la guía de "The Elements of Typographic Style". */
+  --t-micro: 0.6875rem;  /* 11px - metadatos de tabla */
+  --t-menor: 0.8125rem;  /* 13px - etiquetas, texto auxiliar */
+  --t-base: 0.9375rem;   /* 15px - cuerpo */
+  --t-medio: 1.125rem;   /* 18px - subtítulos */
+  --t-mayor: 1.5rem;     /* 24px - títulos de sección */
+  --t-titulo: 2.25rem;   /* 36px - títulos de página */
+
+  /* La cifra protagonista escala con el ancho: un importe como "$ 855.000"
+     ocupa mucho más que un "47", y a 48px fijos se desborda de su columna. */
+  --t-cifra: clamp(1.75rem, 3.2vw, 3rem);
+  --t-heroe: clamp(2.75rem, 7vw, 5.5rem);
+
+  /* ---------- Espaciado ----------
+     Retícula de 4px. Nombres por tamaño, no por número, para que se lea
+     el intento y no haya que recordar qué era "spacing-3". */
+  --e-minimo: 0.25rem;   /* 4px  */
+  --e-corto: 0.5rem;     /* 8px  */
+  --e-medio: 0.75rem;    /* 12px */
+  --e-normal: 1rem;      /* 16px */
+  --e-amplio: 1.5rem;    /* 24px */
+  --e-generoso: 2.5rem;  /* 40px */
+  --e-vasto: 4rem;       /* 64px */
+
+  /* ---------- Radios ----------
+     Jerarquía deliberada en vez de un radio único para todo:
+     las filas de datos van a canto vivo, los controles apenas redondeados
+     y sólo los paneles de verdad llevan curva visible. */
+  --r-nulo: 0;
+  --r-control: 4px;
+  --r-panel: 14px;
+  --r-pastilla: 999px;
+
+  /* ---------- Profundidad ----------
+     Se usan líneas en lugar de sombras. La sombra aparece sólo en lo que
+     realmente flota por encima de la página (menús y diálogos). */
+  --sombra-flotante: 0 12px 32px rgba(23, 26, 24, 0.14);
+  --sombra-dialogo: 0 24px 64px rgba(23, 26, 24, 0.24);
+
+  /* ---------- Movimiento ---------- */
+  --transicion: 140ms cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* ---------- Medidas ---------- */
+  --ancho-barra: 260px;
+  --ancho-lectura: 68ch;  /* menos de 80 caracteres por línea */
+  --ancho-contenido: 1280px;
+}
+
+/* =====================================================================
+   Superficie oscura
+   ---------------------------------------------------------------------
+   No es un "modo oscuro" global: es una clase que se aplica a las zonas
+   inmersivas (el sitio público, la pantalla de acceso). Dentro de ella
+   los componentes siguen funcionando sin cambios porque leen las mismas
+   variables.
+   ===================================================================== */
+.superficie-oscura {
+  --fondo: var(--verde-hondo);
+  --panel: #14302512;
+  --texto: var(--texto-invertido);
+  --texto-suave: #b5c4ba;
+  --texto-tenue: #8aa093;
+  --borde: #ffffff1f;
+  --borde-fuerte: #ffffff33;
+
+  background-color: var(--fondo);
+  color: var(--texto);
+}

@@ -1,0 +1,626 @@
+/* =====================================================================
+   Componentes de interfaz
+   ---------------------------------------------------------------------
+   Organizado por componente. Cada bloque usa sólo variables de tokens.css,
+   así que no hay ningún color escrito a mano en este archivo.
+   ===================================================================== */
+
+/* ============================== BOTÓN ============================== */
+
+.boton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--e-corto);
+
+  padding: 0.5rem 0.9rem;
+  border: 1px solid transparent;
+  border-radius: var(--r-control);
+
+  font-size: var(--t-menor);
+  font-variation-settings: "wdth" 100, "wght" 550;
+  white-space: nowrap;
+
+  cursor: pointer;
+  transition: background-color var(--transicion), border-color var(--transicion),
+    color var(--transicion);
+}
+
+.boton:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+/* El botón principal es el verde de marca: uno solo por pantalla. */
+.boton--principal {
+  background-color: var(--verde-sala);
+  color: var(--texto-invertido);
+}
+
+.boton--principal:hover:not(:disabled) {
+  background-color: var(--verde-claro);
+}
+
+.boton--secundario {
+  background-color: var(--panel);
+  border-color: var(--borde-fuerte);
+  color: var(--texto);
+}
+
+.boton--secundario:hover:not(:disabled) {
+  border-color: var(--verde-sala);
+  color: var(--verde-sala);
+}
+
+.boton--fantasma {
+  background-color: transparent;
+  color: var(--texto-suave);
+}
+
+.boton--fantasma:hover:not(:disabled) {
+  background-color: var(--neutro-fondo);
+  color: var(--texto);
+}
+
+.boton--peligro {
+  background-color: transparent;
+  border-color: var(--alerta);
+  color: var(--alerta);
+}
+
+.boton--peligro:hover:not(:disabled) {
+  background-color: var(--alerta);
+  color: var(--texto-invertido);
+}
+
+/* Sobre el verde inmersivo el acento de roble es el que destaca. */
+.superficie-oscura .boton--principal {
+  background-color: var(--roble);
+  color: var(--verde-hondo);
+}
+
+.superficie-oscura .boton--principal:hover:not(:disabled) {
+  background-color: var(--roble-suave);
+}
+
+.superficie-oscura .boton--secundario {
+  background-color: transparent;
+  border-color: var(--borde-fuerte);
+  color: var(--texto);
+}
+
+.boton--grande {
+  padding: 0.7rem 1.3rem;
+  font-size: var(--t-base);
+}
+
+.boton--bloque {
+  width: 100%;
+}
+
+.boton--icono {
+  padding: 0.4rem;
+  border-radius: var(--r-control);
+}
+
+/* ============================ FORMULARIOS ============================ */
+
+.campo {
+  display: flex;
+  flex-direction: column;
+  gap: var(--e-minimo);
+}
+
+.campo__etiqueta {
+  font-size: var(--t-menor);
+  font-variation-settings: "wdth" 100, "wght" 550;
+  color: var(--texto-suave);
+}
+
+.campo__control {
+  width: 100%;
+  padding: 0.55rem 0.7rem;
+
+  background-color: var(--panel);
+  border: 1px solid var(--borde-fuerte);
+  border-radius: var(--r-control);
+
+  color: var(--texto);
+  font: inherit;
+  font-size: var(--t-base);
+
+  transition: border-color var(--transicion);
+}
+
+.campo__control:hover:not(:disabled) {
+  border-color: var(--acero);
+}
+
+.campo__control:focus {
+  border-color: var(--verde-sala);
+  outline: 2px solid var(--roble);
+  outline-offset: 1px;
+}
+
+.campo__control:disabled {
+  background-color: var(--neutro-fondo);
+  color: var(--texto-tenue);
+  cursor: not-allowed;
+}
+
+.campo__control--invalido {
+  border-color: var(--alerta);
+}
+
+.campo__control::placeholder {
+  color: var(--texto-tenue);
+}
+
+textarea.campo__control {
+  min-height: 5rem;
+  resize: vertical;
+}
+
+select.campo__control {
+  cursor: pointer;
+}
+
+.campo__error {
+  font-size: var(--t-menor);
+  color: var(--alerta);
+}
+
+.campo__ayuda {
+  font-size: var(--t-menor);
+  color: var(--texto-tenue);
+}
+
+/* Casilla de verificación: se mantiene el control nativo y se cuida el ritmo. */
+.casilla {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--e-corto);
+  cursor: pointer;
+  font-size: var(--t-base);
+}
+
+.casilla input {
+  margin: 0.25rem 0 0;
+  accent-color: var(--verde-sala);
+  width: 1rem;
+  height: 1rem;
+  cursor: pointer;
+}
+
+/* Rejilla de formulario: dos columnas que se apilan en pantallas chicas. */
+.rejilla-formulario {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: var(--e-normal);
+}
+
+.rejilla-formulario > .campo--ancho {
+  grid-column: 1 / -1;
+}
+
+/* ============================== PANEL ============================== */
+
+.panel {
+  background-color: var(--panel);
+  border: 1px solid var(--borde);
+  border-radius: var(--r-panel);
+  padding: var(--e-amplio);
+}
+
+.panel--ajustado {
+  padding: var(--e-normal);
+}
+
+/* El panel sin relleno se usa cuando lo que va adentro es una tabla, para que
+   las filas lleguen hasta el borde. */
+.panel--sin-relleno {
+  padding: 0;
+  overflow: hidden;
+}
+
+.panel__cabecera {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--e-normal);
+  flex-wrap: wrap;
+  margin-bottom: var(--e-normal);
+}
+
+.panel--sin-relleno .panel__cabecera {
+  margin: 0;
+  padding: var(--e-normal) var(--e-amplio);
+  border-bottom: 1px solid var(--borde);
+}
+
+.panel__titulo {
+  font-size: var(--t-medio);
+  font-variation-settings: "wdth" 112, "wght" 600;
+}
+
+/* ============================== MÉTRICA ==============================
+   La cifra va sola, sin caja alrededor: es el elemento protagonista de la
+   identidad y no necesita que una tarjeta la sostenga. */
+
+.metrica {
+  display: flex;
+  flex-direction: column;
+  gap: var(--e-minimo);
+}
+
+.metrica__valor {
+  font-size: var(--t-cifra);
+  font-variation-settings: "wdth" 120, "wght" 500;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+.metrica__valor--chico {
+  font-size: var(--t-mayor);
+}
+
+.metrica__etiqueta {
+  font-size: var(--t-menor);
+  color: var(--texto-suave);
+}
+
+.metrica__detalle {
+  font-size: var(--t-menor);
+  color: var(--texto-tenue);
+}
+
+.metrica--acento .metrica__valor {
+  color: var(--verde-sala);
+}
+
+.superficie-oscura .metrica--acento .metrica__valor {
+  color: var(--roble);
+}
+
+.rejilla-metricas {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: var(--e-amplio);
+}
+
+/* ============================== INSIGNIA ============================== */
+
+.insignia {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--e-minimo);
+
+  padding: 0.15rem 0.55rem;
+  border-radius: var(--r-pastilla);
+
+  font-size: var(--t-micro);
+  font-variation-settings: "wdth" 100, "wght" 600;
+  white-space: nowrap;
+}
+
+.insignia--ok { background-color: var(--ok-fondo); color: var(--ok); }
+.insignia--aviso { background-color: var(--aviso-fondo); color: var(--aviso); }
+.insignia--alerta { background-color: var(--alerta-fondo); color: var(--alerta); }
+.insignia--neutra { background-color: var(--neutro-fondo); color: var(--texto-suave); }
+
+.insignia--marca {
+  background-color: var(--verde-sala);
+  color: var(--texto-invertido);
+}
+
+.insignia--contorno {
+  background-color: transparent;
+  border: 1px solid var(--borde-fuerte);
+  color: var(--texto-suave);
+}
+
+/* =============================== TABLA ===============================
+   Sin bordes exteriores ni sombras: sólo líneas finas entre filas. Los
+   números van con figuras tabulares para que las columnas se alineen. */
+
+.tabla-envoltorio {
+  overflow-x: auto;
+}
+
+.tabla {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--t-menor);
+}
+
+.tabla th {
+  padding: var(--e-medio) var(--e-normal);
+  border-bottom: 1px solid var(--borde-fuerte);
+
+  font-variation-settings: "wdth" 100, "wght" 600;
+  color: var(--texto-suave);
+  text-align: left;
+  white-space: nowrap;
+}
+
+.tabla td {
+  padding: var(--e-medio) var(--e-normal);
+  border-bottom: 1px solid var(--borde);
+  vertical-align: middle;
+}
+
+.tabla tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.tabla tbody tr:hover {
+  background-color: var(--neutro-fondo);
+}
+
+.tabla__numero {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.tabla__acciones {
+  text-align: right;
+  white-space: nowrap;
+}
+
+.tabla__principal {
+  font-size: var(--t-base);
+  font-variation-settings: "wdth" 100, "wght" 550;
+}
+
+.tabla--compacta th,
+.tabla--compacta td {
+  padding: var(--e-corto) var(--e-medio);
+}
+
+/* ============================== AVISO ============================== */
+
+.aviso {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--e-medio);
+
+  padding: var(--e-medio) var(--e-normal);
+  border-radius: var(--r-control);
+  border-left: 3px solid;
+
+  font-size: var(--t-menor);
+}
+
+.aviso--error { background-color: var(--alerta-fondo); border-color: var(--alerta); color: var(--alerta); }
+.aviso--ok { background-color: var(--ok-fondo); border-color: var(--ok); color: var(--ok); }
+.aviso--atencion { background-color: var(--aviso-fondo); border-color: var(--aviso); color: var(--aviso); }
+.aviso--info { background-color: var(--neutro-fondo); border-color: var(--acero); color: var(--texto-suave); }
+
+.aviso__cuerpo { flex: 1; }
+
+.aviso__titulo {
+  font-variation-settings: "wdth" 100, "wght" 600;
+}
+
+.aviso__lista {
+  margin: var(--e-minimo) 0 0;
+  padding-left: 1.1rem;
+}
+
+/* ============================ ESTADO VACÍO ============================
+   Una pantalla vacía es una invitación a hacer algo, no un cartel de error. */
+
+.estado-vacio {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--e-medio);
+
+  padding: var(--e-generoso) var(--e-normal);
+  text-align: center;
+  color: var(--texto-suave);
+}
+
+.estado-vacio__icono {
+  color: var(--acero);
+}
+
+.estado-vacio__titulo {
+  font-size: var(--t-medio);
+  font-variation-settings: "wdth" 112, "wght" 600;
+  color: var(--texto);
+}
+
+.estado-vacio p {
+  max-width: 44ch;
+}
+
+/* ============================== CARGA ============================== */
+
+.cargando {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--e-corto);
+
+  padding: var(--e-generoso);
+  color: var(--texto-tenue);
+  font-size: var(--t-menor);
+}
+
+.cargando__disco {
+  width: 1.1rem;
+  height: 1.1rem;
+  border: 2px solid var(--borde-fuerte);
+  border-top-color: var(--verde-sala);
+  border-radius: var(--r-pastilla);
+  animation: girar 700ms linear infinite;
+}
+
+@keyframes girar {
+  to { transform: rotate(360deg); }
+}
+
+/* Marcador de posición para listas que están cargando. */
+.esqueleto {
+  height: 1rem;
+  background-color: var(--neutro-fondo);
+  border-radius: var(--r-control);
+  animation: latir 1.4s ease-in-out infinite;
+}
+
+@keyframes latir {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.45; }
+}
+
+/* ============================== DIÁLOGO ============================== */
+
+.dialogo-fondo {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: var(--e-normal);
+  overflow-y: auto;
+
+  background-color: rgba(14, 36, 27, 0.55);
+  backdrop-filter: blur(3px);
+}
+
+.dialogo {
+  width: 100%;
+  max-width: 560px;
+  margin: auto;
+
+  background-color: var(--tiza);
+  color: var(--tinta);
+  border-radius: var(--r-panel);
+  box-shadow: var(--sombra-dialogo);
+
+  /* El diálogo aparece en respuesta a una acción del usuario, así que la
+     animación acá sí aporta: muestra de dónde salió. */
+  animation: dialogo-entra 160ms cubic-bezier(0.2, 0, 0.2, 1);
+}
+
+.dialogo--ancho { max-width: 860px; }
+
+@keyframes dialogo-entra {
+  from { opacity: 0; transform: translateY(8px) scale(0.99); }
+  to { opacity: 1; transform: none; }
+}
+
+.dialogo__cabecera {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--e-normal);
+
+  padding: var(--e-amplio) var(--e-amplio) var(--e-normal);
+}
+
+.dialogo__titulo {
+  font-size: var(--t-mayor);
+  font-variation-settings: "wdth" 112, "wght" 600;
+}
+
+.dialogo__descripcion {
+  margin-top: var(--e-minimo);
+  font-size: var(--t-menor);
+  color: var(--texto-suave);
+}
+
+.dialogo__cuerpo {
+  padding: 0 var(--e-amplio);
+}
+
+.dialogo__pie {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--e-corto);
+  padding: var(--e-amplio);
+}
+
+/* ============================== PESTAÑAS ============================== */
+
+.pestanas {
+  display: flex;
+  gap: var(--e-amplio);
+  border-bottom: 1px solid var(--borde);
+  overflow-x: auto;
+}
+
+.pestana {
+  padding: var(--e-medio) 0;
+  border: none;
+  border-bottom: 2px solid transparent;
+  background: none;
+
+  font-size: var(--t-menor);
+  font-variation-settings: "wdth" 100, "wght" 550;
+  color: var(--texto-suave);
+  white-space: nowrap;
+  cursor: pointer;
+
+  transition: color var(--transicion), border-color var(--transicion);
+}
+
+.pestana:hover {
+  color: var(--texto);
+}
+
+.pestana--activa {
+  border-bottom-color: var(--verde-sala);
+  color: var(--verde-sala);
+}
+
+/* ============================== PAGINADOR ============================== */
+
+.paginador {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--e-normal);
+  flex-wrap: wrap;
+
+  padding: var(--e-medio) var(--e-amplio);
+  border-top: 1px solid var(--borde);
+  font-size: var(--t-menor);
+  color: var(--texto-suave);
+}
+
+/* =========================== BARRA DE FILTROS =========================== */
+
+.filtros {
+  display: flex;
+  align-items: flex-end;
+  gap: var(--e-medio);
+  flex-wrap: wrap;
+}
+
+.filtros .campo {
+  min-width: 160px;
+}
+
+.filtros__buscador {
+  position: relative;
+  flex: 1;
+  min-width: 220px;
+}
+
+.filtros__buscador .campo__control {
+  padding-left: 2.2rem;
+}
+
+.filtros__lupa {
+  position: absolute;
+  left: 0.65rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--texto-tenue);
+  pointer-events: none;
+}

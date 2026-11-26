@@ -1,0 +1,154 @@
+/* =====================================================================
+   Estilos base y utilidades transversales
+   ===================================================================== */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background-color: var(--fondo);
+  color: var(--texto);
+  font-family: var(--fuente);
+  font-size: var(--t-base);
+  font-variation-settings: "wdth" 100, "wght" 400;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Los títulos usan el eje de ancho expandido y tracking cerrado:
+   es el recurso tipográfico central de la identidad. */
+h1,
+h2,
+h3,
+h4 {
+  margin: 0;
+  font-variation-settings: "wdth" 115, "wght" 600;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  text-wrap: balance;
+}
+
+h1 { font-size: var(--t-titulo); }
+h2 { font-size: var(--t-mayor); }
+h3 { font-size: var(--t-medio); }
+h4 { font-size: var(--t-base); }
+
+p {
+  margin: 0;
+  max-width: var(--ancho-lectura);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+}
+
+/* Todo lo que sea un número se alinea en columna. Es el detalle que hace
+   que las grillas de cuotas y de pesos se lean como una planilla y no
+   como texto corrido. */
+.cifra,
+table td,
+table th,
+input[type="number"] {
+  font-variant-numeric: tabular-nums;
+}
+
+/* La cifra protagonista: expandida, apretada y sin decoración. */
+.cifra-grande {
+  display: block;
+  font-size: var(--t-cifra);
+  font-variation-settings: "wdth" 120, "wght" 500;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------- Accesibilidad ---------- */
+
+:focus-visible {
+  outline: 2px solid var(--roble);
+  outline-offset: 2px;
+  border-radius: var(--r-control);
+}
+
+/* Texto que sólo leen los lectores de pantalla. */
+.solo-lectores {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ---------- Utilidades de maquetación ----------
+   Pocas y con nombre explícito. No es un framework de utilidades:
+   sólo los patrones que se repiten en todas las pantallas. */
+
+.pila {
+  display: flex;
+  flex-direction: column;
+  gap: var(--e-normal);
+}
+
+.pila-corta {
+  display: flex;
+  flex-direction: column;
+  gap: var(--e-corto);
+}
+
+.fila {
+  display: flex;
+  align-items: center;
+  gap: var(--e-medio);
+  flex-wrap: wrap;
+}
+
+.fila-separada {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--e-normal);
+  flex-wrap: wrap;
+}
+
+.crece { flex: 1; }
+
+.texto-suave { color: var(--texto-suave); }
+.texto-tenue { color: var(--texto-tenue); font-size: var(--t-menor); }
+
+/* Etiqueta de dato: pequeña y en minúscula. Deliberadamente NO va en
+   mayúsculas con tracking abierto, que es el recurso más gastado. */
+.etiqueta-dato {
+  display: block;
+  font-size: var(--t-menor);
+  font-variation-settings: "wdth" 100, "wght" 500;
+  color: var(--texto-suave);
+}

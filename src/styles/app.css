@@ -1,0 +1,395 @@
+/* =====================================================================
+   Pantallas de la aplicación
+   ---------------------------------------------------------------------
+   Piezas que sólo se usan adentro del panel: la retícula del tablero, el
+   calendario de asistencias, la grilla de cuotas y el detalle de rutinas.
+   ===================================================================== */
+
+/* ============================== TABLERO ============================== */
+
+.tablero {
+  display: flex;
+  flex-direction: column;
+  gap: var(--e-amplio);
+}
+
+/* Franja de cifras arriba del tablero. Van sin caja: la línea inferior
+   alcanza para separarlas del resto. */
+.tablero__cifras {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: var(--e-amplio);
+
+  padding-bottom: var(--e-amplio);
+  border-bottom: 1px solid var(--borde);
+}
+
+.tablero__columnas {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr;
+  gap: var(--e-amplio);
+  align-items: start;
+}
+
+@media (max-width: 1100px) {
+  .tablero__columnas { grid-template-columns: 1fr; }
+}
+
+/* En el teléfono conviene que entren dos cifras por fila: de a una, el tablero
+   se estira tanto que hay que scrollear para ver lo esencial. */
+@media (max-width: 520px) {
+  .tablero__cifras {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--e-normal);
+  }
+}
+
+/* Acción destacada del socio: marcar asistencia o pagar la cuota. */
+.accion-rapida {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--e-normal);
+  flex-wrap: wrap;
+
+  padding: var(--e-normal) var(--e-amplio);
+  background-color: var(--verde-sala);
+  border-radius: var(--r-panel);
+  color: var(--texto-invertido);
+}
+
+.accion-rapida__texto { font-variation-settings: "wdth" 108, "wght" 550; }
+
+.accion-rapida__detalle {
+  display: block;
+  margin-top: 2px;
+  font-size: var(--t-menor);
+  font-variation-settings: "wdth" 100, "wght" 400;
+  color: var(--roble-suave);
+}
+
+/* ======================== CALENDARIO DE ASISTENCIAS ========================
+   Una cuadrícula de siete columnas con los días del mes. Los días que el
+   socio asistió se rellenan con el verde de marca. */
+
+.calendario {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: var(--e-minimo);
+  max-width: 380px;
+}
+
+.calendario__encabezado {
+  padding-bottom: var(--e-minimo);
+  font-size: var(--t-micro);
+  color: var(--texto-tenue);
+  text-align: center;
+}
+
+.calendario__dia {
+  display: grid;
+  place-items: center;
+  aspect-ratio: 1;
+
+  border: 1px solid var(--borde);
+  border-radius: var(--r-control);
+
+  font-size: var(--t-menor);
+  font-variant-numeric: tabular-nums;
+  color: var(--texto-suave);
+}
+
+.calendario__dia--vacio { border-color: transparent; }
+
+.calendario__dia--asistio {
+  background-color: var(--verde-sala);
+  border-color: var(--verde-sala);
+  color: var(--texto-invertido);
+  font-variation-settings: "wdth" 100, "wght" 600;
+}
+
+.calendario__dia--hoy {
+  border-color: var(--roble);
+  border-width: 2px;
+  color: var(--texto);
+}
+
+/* ========================= GRILLA DE CUOTAS =========================
+   Los doce meses del año en una fila de celdas. Es la vista que el socio
+   mira para saber qué debe. */
+
+.cuotas {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(84px, 1fr));
+  gap: var(--e-corto);
+}
+
+.cuota {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+
+  padding: var(--e-corto) var(--e-medio);
+  border: 1px solid var(--borde);
+  border-radius: var(--r-control);
+
+  text-align: left;
+  background: none;
+  cursor: default;
+}
+
+.cuota__mes {
+  font-size: var(--t-micro);
+  color: var(--texto-suave);
+}
+
+.cuota__estado {
+  font-size: var(--t-menor);
+  font-variation-settings: "wdth" 100, "wght" 600;
+}
+
+.cuota--pagado { background-color: var(--ok-fondo); border-color: var(--ok); }
+.cuota--pagado .cuota__estado { color: var(--ok); }
+
+.cuota--pendiente { background-color: var(--aviso-fondo); border-color: var(--aviso); }
+.cuota--pendiente .cuota__estado { color: var(--aviso); }
+
+.cuota--rechazado,
+.cuota--vencido { background-color: var(--alerta-fondo); border-color: var(--alerta); }
+.cuota--rechazado .cuota__estado,
+.cuota--vencido .cuota__estado { color: var(--alerta); }
+
+.cuota--sin-cargar .cuota__estado { color: var(--texto-tenue); }
+
+/* La celda es un botón cuando se puede pagar ese mes. */
+.cuota--pagable { cursor: pointer; transition: border-color var(--transicion); }
+.cuota--pagable:hover { border-color: var(--verde-sala); }
+
+/* ===================== GRILLA ANUAL DE COBRANZAS =====================
+   La versión del mostrador: un renglón por socio y una columna por mes. */
+
+.grilla-anual { font-size: var(--t-micro); }
+
+.grilla-anual th,
+.grilla-anual td { padding: var(--e-corto) var(--e-minimo); }
+
+.grilla-anual th:first-child,
+.grilla-anual td:first-child {
+  padding-left: var(--e-amplio);
+  text-align: left;
+}
+
+.grilla-anual__celda {
+  display: block;
+  width: 100%;
+  min-width: 26px;
+  padding: 3px 0;
+  border-radius: 3px;
+  text-align: center;
+  font-variation-settings: "wdth" 100, "wght" 600;
+}
+
+.grilla-anual__celda--pagado { background-color: var(--ok); color: var(--texto-invertido); }
+.grilla-anual__celda--pendiente { background-color: var(--aviso); color: var(--texto-invertido); }
+.grilla-anual__celda--rechazado,
+.grilla-anual__celda--vencido { background-color: var(--alerta); color: var(--texto-invertido); }
+.grilla-anual__celda--anulado { background-color: var(--neutro-fondo); color: var(--texto-tenue); }
+.grilla-anual__celda--vacio { color: var(--acero-claro); }
+
+/* ============================ RUTINA ============================
+   Los días de la rutina se muestran en columnas, cada una con sus
+   ejercicios numerados por orden de ejecución: acá la numeración sí
+   corresponde, porque es una secuencia. */
+
+.rutina {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: var(--e-normal);
+}
+
+.rutina__dia {
+  border: 1px solid var(--borde);
+  border-radius: var(--r-panel);
+  overflow: hidden;
+}
+
+.rutina__cabecera {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  padding: var(--e-medio) var(--e-normal);
+  background-color: var(--neutro-fondo);
+  border-bottom: 1px solid var(--borde);
+}
+
+.rutina__titulo {
+  font-variation-settings: "wdth" 112, "wght" 600;
+}
+
+.rutina__ejercicio {
+  display: flex;
+  gap: var(--e-medio);
+  padding: var(--e-medio) var(--e-normal);
+}
+
+.rutina__ejercicio + .rutina__ejercicio { border-top: 1px solid var(--borde); }
+
+.rutina__orden {
+  flex-shrink: 0;
+  width: 1.4rem;
+  font-size: var(--t-menor);
+  font-variant-numeric: tabular-nums;
+  color: var(--texto-tenue);
+}
+
+.rutina__nombre {
+  font-size: var(--t-menor);
+  font-variation-settings: "wdth" 100, "wght" 550;
+}
+
+.rutina__series {
+  display: block;
+  margin-top: 2px;
+  font-size: var(--t-micro);
+  color: var(--texto-suave);
+  font-variant-numeric: tabular-nums;
+}
+
+.rutina__grupo {
+  font-size: var(--t-micro);
+  color: var(--texto-tenue);
+}
+
+/* ============================== DIETA ============================== */
+
+.dieta {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: var(--e-normal);
+}
+
+.dieta__dia {
+  border: 1px solid var(--borde);
+  border-radius: var(--r-panel);
+  overflow: hidden;
+}
+
+.dieta__comida {
+  padding: var(--e-medio) var(--e-normal);
+}
+
+.dieta__comida + .dieta__comida { border-top: 1px solid var(--borde); }
+
+.dieta__categoria {
+  font-size: var(--t-micro);
+  color: var(--texto-tenue);
+}
+
+.dieta__alimento {
+  font-size: var(--t-menor);
+  font-variation-settings: "wdth" 100, "wght" 500;
+}
+
+.dieta__macros {
+  margin-top: 2px;
+  font-size: var(--t-micro);
+  color: var(--texto-suave);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ============================== PROGRESO ============================== */
+
+/* Comparación entre la primera y la última medición. */
+.progreso {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: var(--e-amplio);
+}
+
+.delta {
+  font-size: var(--t-menor);
+  font-variation-settings: "wdth" 100, "wght" 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.delta--baja { color: var(--ok); }
+.delta--sube { color: var(--alerta); }
+.delta--neutra { color: var(--texto-tenue); }
+
+/* ================================ FORO ================================ */
+
+.foro {
+  display: flex;
+  flex-direction: column;
+  gap: var(--e-normal);
+  max-width: 760px;
+}
+
+.publicacion {
+  padding: var(--e-normal) var(--e-amplio);
+  background-color: var(--panel);
+  border: 1px solid var(--borde);
+  border-radius: var(--r-panel);
+}
+
+.publicacion__cabecera {
+  display: flex;
+  align-items: center;
+  gap: var(--e-medio);
+  margin-bottom: var(--e-corto);
+}
+
+.publicacion__autor {
+  font-size: var(--t-menor);
+  font-variation-settings: "wdth" 100, "wght" 600;
+}
+
+.publicacion__fecha {
+  font-size: var(--t-micro);
+  color: var(--texto-tenue);
+}
+
+.publicacion__contenido { white-space: pre-wrap; }
+
+.publicacion__adjunto {
+  margin-top: var(--e-medio);
+  max-width: 100%;
+  max-height: 320px;
+  border-radius: var(--r-control);
+  border: 1px solid var(--borde);
+}
+
+/* Las respuestas se anidan con una línea al costado. */
+.publicacion__respuestas {
+  margin-top: var(--e-normal);
+  padding-left: var(--e-normal);
+  border-left: 2px solid var(--borde);
+  display: flex;
+  flex-direction: column;
+  gap: var(--e-medio);
+}
+
+.respuesta__autor {
+  font-size: var(--t-menor);
+  font-variation-settings: "wdth" 100, "wght" 600;
+}
+
+/* =========================== EDITOR DE RUTINA =========================== */
+
+/* Lista de ejercicios elegidos para un día, con su orden. */
+.editor-dia {
+  border: 1px solid var(--borde);
+  border-radius: var(--r-control);
+  padding: var(--e-medio);
+}
+
+.editor-dia__fila {
+  display: flex;
+  align-items: center;
+  gap: var(--e-corto);
+  padding: var(--e-minimo) 0;
+}
+
+.editor-dia__fila + .editor-dia__fila { border-top: 1px solid var(--borde); }
+
+.editor-dia__nombre { flex: 1; font-size: var(--t-menor); }

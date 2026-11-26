@@ -1,0 +1,565 @@
+/* =====================================================================
+   Sitio público
+   ---------------------------------------------------------------------
+   Toda esta zona va sobre el verde inmersivo. El protagonista es el
+   titular a gran tamaño y, al lado, el estado real del gimnasio: qué
+   sucursales hay y hasta qué hora abren hoy.
+   ===================================================================== */
+
+.heroe {
+  display: grid;
+  grid-template-columns: 1.35fr 0.65fr;
+  align-items: center;
+  gap: var(--e-vasto);
+
+  max-width: var(--ancho-contenido);
+  margin: 0 auto;
+  padding: var(--e-vasto) var(--e-generoso);
+  min-height: min(76vh, 640px);
+}
+
+.heroe__titulo {
+  font-size: var(--t-heroe);
+  font-variation-settings: "wdth" 108, "wght" 620;
+  letter-spacing: -0.035em;
+  line-height: 0.98;
+  text-wrap: balance;
+}
+
+/* El punto final del titular va en roble: es el único adorno del héroe y
+   marca el remate de la frase. */
+.heroe__punto { color: var(--roble); }
+
+.heroe__bajada {
+  margin-top: var(--e-amplio);
+  max-width: 46ch;
+  font-size: var(--t-medio);
+  color: var(--texto-suave);
+}
+
+.heroe__acciones {
+  display: flex;
+  gap: var(--e-medio);
+  flex-wrap: wrap;
+  margin-top: var(--e-generoso);
+}
+
+/* ---------- Panel del estado de hoy ----------
+   No es un adorno: es el dato que un socio mira antes de salir de la casa. */
+
+.hoy {
+  border: 1px solid var(--borde-fuerte);
+  border-radius: var(--r-panel);
+  overflow: hidden;
+}
+
+.hoy__cabecera {
+  padding: var(--e-medio) var(--e-normal);
+  border-bottom: 1px solid var(--borde);
+  font-size: var(--t-menor);
+  color: var(--texto-suave);
+}
+
+.hoy__sede {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--e-normal);
+  padding: var(--e-normal);
+}
+
+.hoy__sede + .hoy__sede { border-top: 1px solid var(--borde); }
+
+.hoy__nombre {
+  font-variation-settings: "wdth" 108, "wght" 600;
+}
+
+.hoy__direccion {
+  display: block;
+  margin-top: 2px;
+  font-size: var(--t-micro);
+  color: var(--texto-tenue);
+}
+
+.hoy__horario {
+  font-variation-settings: "wdth" 115, "wght" 500;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.hoy__cerrado { color: var(--texto-tenue); }
+
+/* Punto verde que indica que la sede está abierta en este momento. */
+.hoy__senal {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  margin-right: 6px;
+  border-radius: var(--r-pastilla);
+  background-color: var(--roble);
+  vertical-align: middle;
+}
+
+/* ---------- Secciones del sitio ---------- */
+
+.seccion {
+  max-width: var(--ancho-contenido);
+  margin: 0 auto;
+  padding: var(--e-vasto) var(--e-generoso);
+  border-top: 1px solid var(--borde);
+}
+
+.seccion__titulo {
+  font-size: var(--t-titulo);
+  font-variation-settings: "wdth" 110, "wght" 600;
+}
+
+.seccion__bajada {
+  margin-top: var(--e-corto);
+  margin-bottom: var(--e-generoso);
+  color: var(--texto-suave);
+}
+
+/* ---------- Planes ----------
+   El precio es el dato que se compara, así que va como cifra grande. Las
+   columnas tienen sólo una línea divisoria entre ellas: nada de tres
+   tarjetas iguales con sombra. */
+
+.planes {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 0;
+  border: 1px solid var(--borde-fuerte);
+  border-radius: var(--r-panel);
+  overflow: hidden;
+}
+
+.plan {
+  display: flex;
+  flex-direction: column;
+  gap: var(--e-medio);
+  padding: var(--e-amplio);
+}
+
+.plan + .plan { border-left: 1px solid var(--borde); }
+
+.plan__nombre {
+  font-size: var(--t-medio);
+  font-variation-settings: "wdth" 112, "wght" 600;
+}
+
+.plan__precio {
+  font-size: var(--t-cifra);
+  font-variation-settings: "wdth" 120, "wght" 500;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  color: var(--roble);
+}
+
+/* Va debajo del precio y no se parte: "por 30 días" es una sola idea. */
+.plan__periodo {
+  display: block;
+  margin-top: 2px;
+  font-size: var(--t-menor);
+  color: var(--texto-tenue);
+  white-space: nowrap;
+}
+
+.plan__detalle {
+  flex: 1;
+  color: var(--texto-suave);
+  font-size: var(--t-menor);
+}
+
+.plan__rasgos {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: var(--t-menor);
+  color: var(--texto-suave);
+}
+
+.plan__rasgos li {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--e-corto);
+  padding: 2px 0;
+}
+
+/* ---------- Servicios ---------- */
+
+.servicios {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: var(--e-amplio);
+}
+
+.servicio__imagen {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: var(--r-panel);
+  border: 1px solid var(--borde);
+  background-color: var(--panel);
+}
+
+.servicio__titulo {
+  margin-top: var(--e-medio);
+  font-size: var(--t-medio);
+  font-variation-settings: "wdth" 110, "wght" 600;
+}
+
+.servicio__texto {
+  margin-top: var(--e-minimo);
+  color: var(--texto-suave);
+  font-size: var(--t-menor);
+}
+
+/* ---------- Frases ----------
+   Las frases que carga el gimnasio se muestran como citas, no como tarjetas. */
+
+.frases {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--e-generoso);
+}
+
+.frase {
+  padding-left: var(--e-normal);
+  border-left: 2px solid var(--roble);
+}
+
+.frase__texto {
+  font-size: var(--t-mayor);
+  font-variation-settings: "wdth" 105, "wght" 450;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+}
+
+.frase__autor {
+  margin-top: var(--e-corto);
+  font-size: var(--t-menor);
+  color: var(--texto-tenue);
+}
+
+/* ---------- Grilla de sucursales ---------- */
+
+.sedes {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: var(--e-amplio);
+}
+
+.sede {
+  padding: var(--e-amplio);
+  border: 1px solid var(--borde);
+  border-radius: var(--r-panel);
+  transition: border-color var(--transicion), box-shadow var(--transicion);
+}
+
+/* La sede elegida en el mapa. Es un resalte de borde, no una sombra: acá la profundidad
+   se marca con líneas. */
+.sede--activa {
+  border-color: var(--roble);
+  box-shadow: 0 0 0 1px var(--roble);
+}
+
+.sede__nombre {
+  font-size: var(--t-medio);
+  font-variation-settings: "wdth" 112, "wght" 600;
+}
+
+.sede__enlaces {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--e-normal);
+  margin-top: var(--e-corto);
+}
+
+.sede__mapa {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  /* "Ver en el mapa" es un <button>: se le quita el aspecto de botón para que se lea
+     igual que los enlaces de al lado. */
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  font-size: var(--t-menor);
+  color: var(--roble);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.sede__mapa:hover {
+  text-decoration: underline;
+}
+
+.sede__tabla {
+  margin-top: var(--e-normal);
+  width: 100%;
+  font-size: var(--t-menor);
+  border-collapse: collapse;
+}
+
+.sede__tabla td {
+  padding: 3px 0;
+  color: var(--texto-suave);
+}
+
+.sede__tabla td:last-child {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ======================= MAPA DE SUCURSALES =======================
+   Un mapa grande arriba de la lista. El mapa base lo pone MapLibre; acá sólo se
+   viste lo que es nuestro: el marco, los pines, el globo con los datos y el botón. */
+
+.mapa-sedes {
+  position: relative;
+  display: grid;
+  place-items: center;
+  height: clamp(380px, 62vh, 620px);
+  margin-bottom: var(--e-generoso);
+  border: 1px solid var(--borde-fuerte);
+  border-radius: var(--r-panel);
+  overflow: hidden;
+  /* Se ve mientras llegan los mosaicos, y mientras se descarga MapLibre. */
+  background-color: var(--verde-hondo);
+}
+
+.mapa {
+  position: absolute;
+  inset: 0;
+}
+
+/* Con el prefijo .mapa por la misma razón que el globo: MapLibre le pone a este elemento
+   la clase maplibregl-map, cuyo "position: relative" llega después y lo dejaría sin alto. */
+.mapa .mapa__lienzo {
+  position: absolute;
+  inset: 0;
+}
+
+.mapa__aviso {
+  padding: var(--e-amplio);
+  text-align: center;
+  font-size: var(--t-menor);
+  color: var(--texto-suave);
+}
+
+.mapa__todas {
+  position: absolute;
+  top: var(--e-medio);
+  left: var(--e-medio);
+  z-index: 2;
+  padding: 6px var(--e-medio);
+  border: 1px solid var(--borde-fuerte);
+  border-radius: var(--r-control);
+  background-color: var(--tiza);
+  color: var(--tinta);
+  font: inherit;
+  font-size: var(--t-menor);
+  cursor: pointer;
+  transition: background-color var(--transicion);
+}
+
+.mapa__todas:hover {
+  background-color: var(--roble-suave);
+}
+
+.mapa__todas:focus-visible {
+  outline: 2px solid var(--roble);
+  outline-offset: 2px;
+}
+
+/* Pines. MapLibre los posiciona con un transform sobre el propio botón, así que el
+   tamaño y los resaltes se aplican al dibujo de adentro y no al botón. */
+.pin-sede {
+  display: block;
+  padding: 0;
+  border: 0;
+  background: none;
+  line-height: 0;
+  cursor: pointer;
+}
+
+.pin-sede svg {
+  display: block;
+  transform-origin: 50% 100%;
+  transition: transform var(--transicion);
+  filter: drop-shadow(0 2px 3px rgb(0 0 0 / 0.35));
+}
+
+.pin-sede__cuerpo {
+  fill: var(--roble);
+  stroke: var(--verde-hondo);
+  stroke-width: 2;
+}
+
+.pin-sede__centro {
+  fill: var(--verde-hondo);
+}
+
+.pin-sede--matriz svg {
+  transform: scale(1.15);
+}
+
+.pin-sede:hover svg,
+.pin-sede:focus-visible svg {
+  transform: scale(1.12);
+}
+
+.pin-sede:focus-visible {
+  outline: 2px solid var(--roble);
+  outline-offset: 2px;
+  border-radius: var(--r-pastilla);
+}
+
+.pin-sede--activo svg {
+  transform: scale(1.3);
+}
+
+.pin-sede--activo .pin-sede__cuerpo {
+  fill: var(--verde-sala);
+  stroke: var(--roble);
+}
+
+.pin-sede--activo .pin-sede__centro {
+  fill: var(--roble);
+}
+
+/* Globo con los datos de la sede. Va sobre el mapa claro, así que usa la paleta de
+   papel (tiza y tinta) y no la de la superficie oscura que lo rodea.
+   Todos los selectores llevan el prefijo .mapa-sedes a propósito: el CSS de MapLibre se
+   carga recién cuando se abre el mapa, o sea después de éste, y con la misma
+   especificidad sus reglas pisarían las nuestras. */
+.mapa-sedes .maplibregl-popup-content {
+  padding: var(--e-normal) var(--e-normal) var(--e-medio);
+  border-radius: var(--r-control);
+  background-color: var(--tiza);
+  color: var(--tinta);
+  box-shadow: var(--sombra-flotante);
+  font-family: var(--fuente);
+}
+
+.mapa-sedes .maplibregl-popup-anchor-bottom .maplibregl-popup-tip,
+.mapa-sedes .maplibregl-popup-anchor-bottom-left .maplibregl-popup-tip,
+.mapa-sedes .maplibregl-popup-anchor-bottom-right .maplibregl-popup-tip {
+  border-top-color: var(--tiza);
+}
+
+.mapa-sedes .maplibregl-popup-anchor-top .maplibregl-popup-tip,
+.mapa-sedes .maplibregl-popup-anchor-top-left .maplibregl-popup-tip,
+.mapa-sedes .maplibregl-popup-anchor-top-right .maplibregl-popup-tip {
+  border-bottom-color: var(--tiza);
+}
+
+.mapa-sedes .maplibregl-popup-anchor-left .maplibregl-popup-tip {
+  border-right-color: var(--tiza);
+}
+
+.mapa-sedes .maplibregl-popup-anchor-right .maplibregl-popup-tip {
+  border-left-color: var(--tiza);
+}
+
+/* Ojo con --texto-suave: dentro de la superficie oscura vale un gris claro, ilegible sobre
+   el papel del globo. El texto secundario se calcula desde la tinta y la tiza. */
+.mapa-sedes .maplibregl-popup-close-button {
+  padding: 2px 8px;
+  font-size: var(--t-medio);
+  color: color-mix(in srgb, var(--tinta) 70%, var(--tiza));
+}
+
+.globo-sede {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding-right: var(--e-amplio);
+}
+
+.globo-sede strong {
+  font-variation-settings: "wdth" 112, "wght" 600;
+}
+
+.globo-sede span {
+  font-size: var(--t-menor);
+  color: color-mix(in srgb, var(--tinta) 70%, var(--tiza));
+}
+
+.globo-sede a {
+  margin-top: var(--e-corto);
+  font-size: var(--t-menor);
+  /* El roble solo no alcanza el contraste mínimo sobre fondo claro: se oscurece con tinta. */
+  color: color-mix(in srgb, var(--roble) 65%, var(--tinta));
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+/* ======================= PANTALLA DE ACCESO ======================= */
+
+.acceso {
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+  padding: var(--e-normal);
+}
+
+.acceso__caja {
+  width: 100%;
+  max-width: 400px;
+}
+
+.acceso__titulo {
+  margin: var(--e-amplio) 0 var(--e-corto);
+  font-size: var(--t-mayor);
+}
+
+.acceso__bajada {
+  margin-bottom: var(--e-amplio);
+  color: var(--texto-suave);
+  font-size: var(--t-menor);
+}
+
+.acceso__formulario {
+  display: flex;
+  flex-direction: column;
+  gap: var(--e-normal);
+  padding: var(--e-amplio);
+  border: 1px solid var(--borde-fuerte);
+  border-radius: var(--r-panel);
+}
+
+.acceso__pie {
+  margin-top: var(--e-normal);
+  text-align: center;
+  font-size: var(--t-menor);
+  color: var(--texto-suave);
+}
+
+.acceso__pie a {
+  color: var(--roble);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+/* Ayuda con los usuarios de prueba. Sólo aparece en desarrollo. */
+/* ============================ RESPONSIVO ============================ */
+
+@media (max-width: 900px) {
+  .heroe {
+    grid-template-columns: 1fr;
+    gap: var(--e-generoso);
+    padding: var(--e-generoso) var(--e-normal);
+    min-height: 0;
+  }
+
+  .seccion { padding: var(--e-generoso) var(--e-normal); }
+
+  .plan + .plan {
+    border-left: none;
+    border-top: 1px solid var(--borde);
+  }
+}
